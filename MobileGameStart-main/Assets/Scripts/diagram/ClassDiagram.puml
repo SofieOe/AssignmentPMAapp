@@ -1,0 +1,42 @@
+﻿@startuml
+class BaseBrick <<abstract>> {
+}
+class FastBrick {
+}
+class GameManager {
+    + brickPref : GameObject[]
+    + spawnRate : float
+    + attributes : DodgerAttributes
+    + tapText : GameObject
+    + scoreText : TextMeshProUGUI
+}
+class InputSys {
+    + IsPressing(Vector2 : out) : bool
+}
+class Player {
+    + moveSpeed : float
+    + attributes : DodgerAttributes
+    - OnCollisionEnter2D(collision : Collision2D) : void
+}
+class SlowBrick {
+}
+class DodgerAttributes {
+    + health : int
+    + maxHealth : int
+    + curscore : int
+    + GetTheHealth() : int
+    + GetTheMaxHealth(v : int) : int
+    + GetTheScore() : int
+    + SetTheHealth(newHealth : int) : void
+    + SetTheScore(newScore : int) : void
+}
+MonoBehaviour <|-- BaseBrick
+BaseBrick <|-- FastBrick
+MonoBehaviour <|-- GameManager
+MonoBehaviour <|-- InputSys
+MonoBehaviour <|-- Player
+BaseBrick <|-- SlowBrick
+ScriptableObject <|-- DodgerAttributes
+GameManager --> DodgerAttributes : field
+Player --> DodgerAttributes : field
+@enduml
